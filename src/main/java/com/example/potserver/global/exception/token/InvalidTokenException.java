@@ -1,7 +1,7 @@
 package com.example.potserver.global.exception.token;
 
-import com.example.lezhinassignment.global.error.exception.BusinessException;
-import com.example.lezhinassignment.global.error.exception.ErrorCode;
+import com.example.potserver.global.error.exception.BusinessException;
+import com.example.potserver.global.error.exception.ErrorCode;
 
 public class InvalidTokenException extends BusinessException {
 
