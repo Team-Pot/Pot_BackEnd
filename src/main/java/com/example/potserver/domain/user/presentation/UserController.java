@@ -1,6 +1,7 @@
 package com.example.potserver.domain.user.presentation;
 
 import com.example.potserver.domain.user.presentation.dto.request.SignupRequest;
+import com.example.potserver.domain.user.presentation.dto.response.TokenResponse;
 import com.example.potserver.domain.user.service.LoginService;
 import com.example.potserver.domain.user.service.SignupService;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +21,9 @@ public class UserController {
         signupService.signup(request);
     }
 
-
     @PostMapping("/login")
-    public void login(@RequestBody SignupRequest request) {
-        loginService.login(request);
+    public TokenResponse login(@RequestBody SignupRequest request) {
+        return loginService.login(request);
     }
 
 }
