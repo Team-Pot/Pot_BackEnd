@@ -34,9 +34,9 @@ public class LoginService {
         }
 
         return TokenResponse.builder()
+                .refreshToken(jwtTokenProvider.createRefreshToken(user.getUserId()))
                 .accessToken(jwtTokenProvider.createAccessToken(user.getUserId()))
                 .accessExpiredAt(new Date(now.getTime() + jwtProperties.getAccessExpiration()))
-                .refreshToken(jwtTokenProvider.createRefreshToken(user.getUserId()))
                 .refreshExpiredAt(new Date(now.getTime() + jwtProperties.getRefreshExpiration()))
                 .build();
     }
