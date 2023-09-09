@@ -1,4 +1,4 @@
-package com.example.potserver.domain.auth.repository.entity;
+package com.example.potserver.domain.auth.entity;
 
 import lombok.Builder;
 import lombok.Getter;
