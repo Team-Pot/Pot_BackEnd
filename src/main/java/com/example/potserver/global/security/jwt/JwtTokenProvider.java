@@ -1,6 +1,14 @@
 package com.example.potserver.global.security.jwt;
 
+import com.example.potserver.domain.auth.repository.RefreshTokenRepository;
+import com.example.potserver.domain.auth.repository.entity.RefreshToken;
+import com.example.potserver.global.exception.token.ExpiredTokenException;
+import com.example.potserver.global.exception.token.InvalidTokenException;
 import com.example.potserver.global.security.auth.CustomUserDetailsService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +25,7 @@ public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
     private final CustomUserDetailsService customUserDetailsService;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     public String createAccessToken(String userId) {
 
@@ -29,6 +38,27 @@ public class JwtTokenProvider {
                 .setExpiration(new Date(now.getTime() + jwtProperties.getAccessExpiration() * 1000))
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
                 .compact();
+    }
+
+    public String createRefreshToken(String userId) {
+
+        Date now = new Date();
+
+        String refreshToken = Jwts.builder()
+                .claim("type", "refresh")
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + jwtProperties.getRefreshExpiration() * 1000))
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
+                .compact();
+
+        refreshTokenRepository.save(
+                RefreshToken.builder()
+                        .userId(userId)
+                        .token(refreshToken)
+                        .timeToLive(jwtProperties.getRefreshExpiration())
+                        .build());
+
+        return refreshToken;
     }
 
     public Authentication getAuthentication(String token) {
