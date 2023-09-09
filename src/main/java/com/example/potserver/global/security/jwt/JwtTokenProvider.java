@@ -1,7 +1,7 @@
 package com.example.potserver.global.security.jwt;
 
 import com.example.potserver.domain.auth.repository.RefreshTokenRepository;
-import com.example.potserver.domain.auth.repository.entity.RefreshToken;
+import com.example.potserver.domain.auth.entity.RefreshToken;
 import com.example.potserver.global.exception.token.ExpiredTokenException;
 import com.example.potserver.global.exception.token.InvalidTokenException;
 import com.example.potserver.global.security.auth.CustomUserDetailsService;
