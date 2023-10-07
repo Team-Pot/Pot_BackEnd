@@ -23,8 +23,6 @@ public class LoginService {
     private final PasswordEncoder passwordEncoder;
 
     public TokenResponse login(SignupRequest request) {
-        Date now = new Date();
-
         User user = userRepository.findByUserId(request.getUserId())
                 .orElseThrow(()-> UserNotFoundException.EXCEPTION);
 
