@@ -16,6 +16,7 @@ public enum ErrorCode {
     //user
     USER_NOT_FOUND(404, "User not found"),
     PASSWORD_MISMATCH(403, "Password mismatch"),
+    USER_EXISTS(403, "User exists"),
 
     // general
     BAD_REQUEST(400, "Bad request"),
