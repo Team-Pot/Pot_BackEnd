@@ -18,6 +18,10 @@ public class SignupService {
     private final JwtTokenProvider jwtTokenProvider;
 
     public TokenResponse signup(SignupRequest request) {
+        if(userRepository.findByUserId(request.getUserId()).isPresent()) {
+            throw UserExistsException.
+        }
+
         String password = passwordEncoder.encode(request.getPassword());
 
         userRepository.save(
