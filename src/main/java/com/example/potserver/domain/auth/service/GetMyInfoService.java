@@ -17,4 +17,5 @@ public class GetMyInfoService {
 
         return new MyInfoResponse(user);
     }
+
 }

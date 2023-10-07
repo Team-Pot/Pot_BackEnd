@@ -7,7 +7,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class MyInfoResponse {
-
     private String userId;
 
     public MyInfoResponse(User user) {
