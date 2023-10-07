@@ -20,7 +20,6 @@ public class LoginService {
 
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
-    private final JwtProperties jwtProperties;
     private final PasswordEncoder passwordEncoder;
 
     public TokenResponse login(SignupRequest request) {
@@ -33,11 +32,7 @@ public class LoginService {
             throw PasswordMismatchException.EXCEPTION;
         }
 
-        return TokenResponse.builder()
-                .refreshToken(jwtTokenProvider.createRefreshToken(user.getUserId()))
-                .accessToken(jwtTokenProvider.createAccessToken(user.getUserId()))
-                .accessExpiredAt(new Date(now.getTime() + jwtProperties.getAccessExpiration()))
-                .refreshExpiredAt(new Date(now.getTime() + jwtProperties.getRefreshExpiration()))
-                .build();
+        return jwtTokenProvider.createToken(request.getUserId());
     }
+
 }
