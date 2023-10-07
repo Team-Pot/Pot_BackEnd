@@ -1,4 +1,4 @@
-package com.example.potserver.domain.user.presentation.dto.request;
+package com.example.potserver.domain.auth.presentation.dto.request;
 
 import lombok.AccessLevel;
 import lombok.Getter;

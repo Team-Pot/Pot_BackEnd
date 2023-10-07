@@ -1,4 +1,4 @@
-package com.example.potserver.domain.user.presentation.dto.response;
+package com.example.potserver.domain.auth.presentation.dto.response;
 
 import com.example.potserver.domain.user.entity.User;
 import lombok.AllArgsConstructor;

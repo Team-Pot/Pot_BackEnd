@@ -1,7 +1,7 @@
-package com.example.potserver.domain.user.service;
+package com.example.potserver.domain.auth.service;
 
 import com.example.potserver.domain.user.entity.User;
-import com.example.potserver.domain.user.presentation.dto.request.SignupRequest;
+import com.example.potserver.domain.auth.presentation.dto.request.SignupRequest;
 import com.example.potserver.domain.auth.presentation.dto.response.TokenResponse;
 import com.example.potserver.domain.user.repository.UserRepository;
 import com.example.potserver.global.exception.user.PasswordMismatchException;

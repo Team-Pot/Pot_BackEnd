@@ -1,8 +1,8 @@
-package com.example.potserver.domain.user.service;
+package com.example.potserver.domain.auth.service;
 
 import com.example.potserver.domain.user.entity.User;
 import com.example.potserver.domain.user.facade.UserFacade;
-import com.example.potserver.domain.user.presentation.dto.response.MyInfoResponse;
+import com.example.potserver.domain.auth.presentation.dto.response.MyInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
