@@ -21,8 +21,8 @@ public class AuthController {
     private final GetMyInfoService getMyInfoService;
 
     @PostMapping("/signup")
-    public void signup(@RequestBody SignupRequest request) {
-        signupService.signup(request);
+    public TokenResponse signup(@RequestBody SignupRequest request) {
+        return signupService.signup(request);
     }
 
     @PostMapping("/login")
