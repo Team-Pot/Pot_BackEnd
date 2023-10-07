@@ -1,5 +1,6 @@
 package com.example.potserver.global.security.jwt;
 
+import com.example.potserver.domain.auth.presentation.dto.response.TokenResponse;
 import com.example.potserver.domain.auth.repository.RefreshTokenRepository;
 import com.example.potserver.domain.auth.entity.RefreshToken;
 import com.example.potserver.global.exception.token.ExpiredTokenException;
@@ -26,6 +27,17 @@ public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
     private final CustomUserDetailsService customUserDetailsService;
     private final RefreshTokenRepository refreshTokenRepository;
+
+    public TokenResponse createToken(String userId) {
+        Date now = new Date();
+
+        return TokenResponse.builder()
+                .accessToken(createAccessToken(userId))
+                .accessExpiredAt(new Date(now.getTime() + jwtProperties.getAccessExpiration()))
+                .refreshToken(createRefreshToken(userId))
+                .refreshExpiredAt(new Date(now.getTime() + jwtProperties.getRefreshExpiration()))
+                .build();
+    }
 
     public String createAccessToken(String userId) {
 
