@@ -12,9 +12,4 @@ public class SingleResponseDto<T> {
         this.message = "success";
     }
 
-    public SingleResponseDto(T data, String message) {
-        this.data = data;
-        this.message = message;
-    }
-
 }
