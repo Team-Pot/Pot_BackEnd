@@ -1,5 +1,6 @@
 package com.example.potserver.domain.user.service;
 
+import com.example.potserver.domain.user.entity.User;
 import com.example.potserver.domain.user.presentation.dto.response.EmailVerificationResult;
 import com.example.potserver.domain.user.repository.UserRepository;
 import com.example.potserver.global.exception.user.EmailExistsException;
@@ -13,6 +14,7 @@ import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.Duration;
+import java.util.Optional;
 import java.util.Random;
 
 @Slf4j
@@ -44,8 +46,10 @@ public class UserService {
     }
 
     private void checkDuplicatedEmail(String email) {
-        userRepository.findByEmail(email)
-                .orElseThrow(()-> EmailExistsException.EXCEPTION);
+        Optional<User> user = userRepository.findByEmail(email);
+        if(user.isPresent()) {
+            throw EmailExistsException.EXCEPTION;
+        }
     }
 
     private String createCode() {

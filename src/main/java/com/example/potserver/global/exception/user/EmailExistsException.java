@@ -7,7 +7,7 @@ public class EmailExistsException extends BusinessException {
     public static final BusinessException EXCEPTION = new EmailExistsException();
 
     public EmailExistsException() {
-        super(ErrorCode.PASSWORD_MISMATCH);
+        super(ErrorCode.EMAIL_EXISTS);
     }
 
 }
