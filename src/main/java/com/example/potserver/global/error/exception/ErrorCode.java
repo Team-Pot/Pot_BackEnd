@@ -17,6 +17,7 @@ public enum ErrorCode {
     USER_NOT_FOUND(404, "User not found"),
     PASSWORD_MISMATCH(403, "Password mismatch"),
     USER_EXISTS(403, "User exists"),
+    EMAIL_EXISTS(403, "Email exists"),
     UNABLE_SEND_EMAIL(500, "Unable to send email"),
     NO_SUCH_ALGORITHM(500, "No such algorithm"),
 

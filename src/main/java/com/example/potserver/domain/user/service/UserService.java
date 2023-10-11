@@ -1,10 +1,9 @@
 package com.example.potserver.domain.user.service;
 
-import com.example.potserver.domain.user.entity.User;
 import com.example.potserver.domain.user.presentation.dto.response.EmailVerificationResult;
 import com.example.potserver.domain.user.repository.UserRepository;
+import com.example.potserver.global.exception.user.EmailExistsException;
 import com.example.potserver.global.exception.user.UnableSuchAlgorithmException;
-import com.example.potserver.global.exception.user.UserExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +13,6 @@ import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.Duration;
-import java.util.Optional;
 import java.util.Random;
 
 @Slf4j
@@ -36,6 +34,7 @@ public class UserService {
 
 	public void sendCodeToEmail(String toEmail) {
         this.checkDuplicatedEmail(toEmail);
+
         String title = "Travel with me 이메일 인증 번호";
         String authCode = this.createCode();
         mailService.sendEmail(toEmail, title, authCode);
@@ -45,11 +44,8 @@ public class UserService {
     }
 
     private void checkDuplicatedEmail(String email) {
-        Optional<User> member = userRepository.findByEmail(email);
-        if (member.isPresent()) {
-            log.debug("MemberServiceImpl.checkDuplicatedEmail exception occur email: {}", email);
-            throw UserExistsException.EXCEPTION;
-        }
+        userRepository.findByEmail(email)
+                .orElseThrow(()-> EmailExistsException.EXCEPTION);
     }
 
     private String createCode() {
