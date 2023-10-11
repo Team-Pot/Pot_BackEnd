@@ -21,11 +21,11 @@ import java.util.Random;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemberService {
+public class UserService {
 
     private static final String AUTH_CODE_PREFIX = "AuthCode ";
 
-    private final UserRepository memberRepository;
+    private final UserRepository userRepository;
 
     private final MailService mailService;
 
@@ -45,7 +45,7 @@ public class MemberService {
     }
 
     private void checkDuplicatedEmail(String email) {
-        Optional<User> member = memberRepository.findByEmail(email);
+        Optional<User> member = userRepository.findByEmail(email);
         if (member.isPresent()) {
             log.debug("MemberServiceImpl.checkDuplicatedEmail exception occur email: {}", email);
             throw UserExistsException.EXCEPTION;

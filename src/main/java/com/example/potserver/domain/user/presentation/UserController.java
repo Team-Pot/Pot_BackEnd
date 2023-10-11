@@ -1,8 +1,8 @@
 package com.example.potserver.domain.user.presentation;
 
-import com.example.potserver.domain.user.service.MemberService;
 import com.example.potserver.domain.user.presentation.dto.response.EmailVerificationResult;
 import com.example.potserver.domain.user.presentation.dto.response.SingleResponseDto;
+import com.example.potserver.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,13 +15,13 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
-public class MemberController {
+public class UserController {
 
-    private final MemberService memberService;
+    private final UserService userService;
 
     @PostMapping("/emails/verification-requests")
     public ResponseEntity sendMessage(@RequestParam("email") @Valid String email) {
-        memberService.sendCodeToEmail(email);
+        userService.sendCodeToEmail(email);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -29,7 +29,7 @@ public class MemberController {
     @GetMapping("/emails/verifications")
     public ResponseEntity verificationEmail(@RequestParam("email") @Valid String email,
                                             @RequestParam("code") String authCode) {
-        EmailVerificationResult response = memberService.verifiedCode(email, authCode);
+        EmailVerificationResult response = userService.verifiedCode(email, authCode);
 
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
