@@ -7,13 +7,13 @@ import com.example.potserver.domain.auth.service.GetMyInfoService;
 import com.example.potserver.domain.auth.service.LoginService;
 import com.example.potserver.domain.auth.service.SignupService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/auth")
 public class AuthController {
 
     private final SignupService signupService;
@@ -21,16 +21,16 @@ public class AuthController {
     private final GetMyInfoService getMyInfoService;
 
     @PostMapping("/signup")
-    public TokenResponse signup(@RequestBody SignupRequest request) {
+    public TokenResponse signup(@RequestBody @Valid SignupRequest request) {
         return signupService.signup(request);
     }
 
     @PostMapping("/login")
-    public TokenResponse login(@RequestBody SignupRequest request) {
+    public TokenResponse login(@RequestBody @Valid SignupRequest request) {
         return loginService.login(request);
     }
 
-    @GetMapping("/user")
+    @GetMapping("/my-info")
     public MyInfoResponse getMyInfo() {
         return getMyInfoService.getMyInfo();
     }
