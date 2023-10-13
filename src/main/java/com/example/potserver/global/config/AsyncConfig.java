@@ -29,5 +29,5 @@ public class AsyncConfig implements AsyncConfigurer {
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return AsyncConfigurer.super.getAsyncUncaughtExceptionHandler();
     }
-    
+
 }
