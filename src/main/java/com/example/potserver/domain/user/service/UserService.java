@@ -22,7 +22,6 @@ import java.util.Random;
 @Service
 @Transactional
 @RequiredArgsConstructor
-@Async
 public class UserService {
 
     private static final String AUTH_CODE_PREFIX = "AuthCode ";
@@ -36,6 +35,7 @@ public class UserService {
     @Value("${spring.mail.auth-code-expiration-millis}")
     private long authCodeExpirationMillis;
 
+    @Async
 	public void sendCodeToEmail(String toEmail) {
         this.checkDuplicatedEmail(toEmail);
 
