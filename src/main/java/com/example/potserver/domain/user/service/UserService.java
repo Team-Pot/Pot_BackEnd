@@ -8,6 +8,7 @@ import com.example.potserver.global.exception.user.UnableSuchAlgorithmException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,6 +22,7 @@ import java.util.Random;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Async
 public class UserService {
 
     private static final String AUTH_CODE_PREFIX = "AuthCode ";

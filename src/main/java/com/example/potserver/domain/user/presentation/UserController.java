@@ -1,5 +1,6 @@
 package com.example.potserver.domain.user.presentation;
 
+import com.example.potserver.domain.user.presentation.dto.request.SendEmailRequest;
 import com.example.potserver.domain.user.presentation.dto.response.EmailVerificationResult;
 import com.example.potserver.domain.user.presentation.dto.response.SingleResponseDto;
 import com.example.potserver.domain.user.service.UserService;
@@ -19,9 +20,9 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/emails/verification-requests")
-    public ResponseEntity sendMessage(@RequestParam("email") @Valid String email) {
-        userService.sendCodeToEmail(email);
+    @PostMapping("/emails")
+    public ResponseEntity sendMessage(@RequestBody @Valid SendEmailRequest request) {
+        userService.sendCodeToEmail(request.getEmail());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

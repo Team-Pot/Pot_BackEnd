@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class EmailRequest {
+public class SendEmailRequest {
     private String email;
 }
