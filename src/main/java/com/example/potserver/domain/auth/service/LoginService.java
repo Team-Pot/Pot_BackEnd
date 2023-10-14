@@ -1,5 +1,6 @@
 package com.example.potserver.domain.auth.service;
 
+import com.example.potserver.domain.auth.presentation.dto.request.LoginRequest;
 import com.example.potserver.domain.auth.presentation.dto.request.SignupRequest;
 import com.example.potserver.domain.auth.presentation.dto.response.TokenResponse;
 import com.example.potserver.domain.user.entity.User;
@@ -19,7 +20,7 @@ public class LoginService {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
-    public TokenResponse login(SignupRequest request) {
+    public TokenResponse login(LoginRequest request) {
         User user = userRepository.findByUserId(request.getUserId())
                 .orElseThrow(()-> UserNotFoundException.EXCEPTION);
 

@@ -1,5 +1,6 @@
 package com.example.potserver.domain.auth.presentation;
 
+import com.example.potserver.domain.auth.presentation.dto.request.LoginRequest;
 import com.example.potserver.domain.auth.presentation.dto.request.SignupRequest;
 import com.example.potserver.domain.auth.presentation.dto.response.TokenResponse;
 import com.example.potserver.domain.auth.presentation.dto.response.MyInfoResponse;
@@ -26,7 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public TokenResponse login(@RequestBody @Valid SignupRequest request) {
+    public TokenResponse login(@RequestBody @Valid LoginRequest request) {
         return loginService.login(request);
     }
 
