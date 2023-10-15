@@ -11,7 +11,6 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class CheckDuplicatedEmail {
-
     private final UserRepository userRepository;
 
     public void checkDuplicatedEmail(String email) {
@@ -20,5 +19,4 @@ public class CheckDuplicatedEmail {
             throw EmailExistsException.EXCEPTION;
         }
     }
-
 }

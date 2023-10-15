@@ -1,7 +1,6 @@
 package com.example.potserver.domain.user.service;
 
 import com.example.potserver.domain.auth.service.RedisService;
-import com.example.potserver.domain.user.presentation.dto.response.EmailVerificationResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,7 @@ public class CheckCodeService {
     public boolean checkCode(String email, String authCode) {
         checkDuplicatedEmail.checkDuplicatedEmail(email);
         String redisAuthCode = redisService.getValues(AUTH_CODE_PREFIX + email);
-        boolean authResult = redisService.checkExistsValue(redisAuthCode) && redisAuthCode.equals(authCode);
-
-        return authResult;
+        return redisService.checkExistsValue(redisAuthCode) && redisAuthCode.equals(authCode);
     }
 
 }
