@@ -4,7 +4,8 @@ import com.example.potserver.domain.user.presentation.dto.request.CheckEmailRequ
 import com.example.potserver.domain.user.presentation.dto.request.SendEmailRequest;
 import com.example.potserver.domain.user.presentation.dto.response.EmailVerificationResult;
 import com.example.potserver.domain.user.presentation.dto.response.SingleResponseDto;
-import com.example.potserver.domain.user.service.UserService;
+import com.example.potserver.domain.user.service.CheckCodeService;
+import com.example.potserver.domain.user.service.SendCodeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,18 +20,19 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final SendCodeService sendCodeService;
+    private final CheckCodeService checkCodeService;
 
     @PostMapping("/emails")
     public ResponseEntity sendMessage(@RequestBody @Valid SendEmailRequest request) {
-        userService.sendCodeToEmail(request.getEmail());
+        sendCodeService.sendCodeToEmail(request.getEmail());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/emails")
     public ResponseEntity verificationEmail(@RequestBody @Valid CheckEmailRequest request) {
-        EmailVerificationResult response = userService.verifiedCode(request.getEmail(), request.getCode());
+        EmailVerificationResult response = checkCodeService.checkCode(request.getEmail(), request.getCode());
 
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
