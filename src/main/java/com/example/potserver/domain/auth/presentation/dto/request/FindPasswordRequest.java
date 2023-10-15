@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FindPasswordRequest {
-    private String email;
-    private String code;
+    private String password;
 }
+
