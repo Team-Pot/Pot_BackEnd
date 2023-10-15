@@ -24,17 +24,13 @@ public class UserController {
     private final CheckCodeService checkCodeService;
 
     @PostMapping("/emails")
-    public ResponseEntity sendMessage(@RequestBody @Valid SendEmailRequest request) {
+    public void sendMessage(@RequestBody @Valid SendEmailRequest request) {
         sendCodeService.sendCodeToEmail(request.getEmail());
-
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/emails")
-    public ResponseEntity verificationEmail(@RequestBody @Valid CheckEmailRequest request) {
-        EmailVerificationResult response = checkCodeService.checkCode(request.getEmail(), request.getCode());
-
-        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
+    public boolean verificationEmail(@RequestBody @Valid CheckEmailRequest request) {
+        return checkCodeService.checkCode(request.getEmail(), request.getCode());
     }
 
 }
