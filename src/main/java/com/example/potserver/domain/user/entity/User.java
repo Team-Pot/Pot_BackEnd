@@ -24,4 +24,8 @@ public class User {
     @Column(name = "email", nullable = false, length = 20)
     private String email;
 
+    public void changePassword(String password) {
+        this.password = password;
+    }
+
 }
