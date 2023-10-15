@@ -1,12 +1,16 @@
 package com.example.potserver.domain.auth.presentation;
 
+import com.example.potserver.domain.auth.presentation.dto.request.FindPasswordRequest;
 import com.example.potserver.domain.auth.presentation.dto.request.LoginRequest;
 import com.example.potserver.domain.auth.presentation.dto.request.SignupRequest;
+import com.example.potserver.domain.auth.presentation.dto.response.PasswordResponse;
 import com.example.potserver.domain.auth.presentation.dto.response.TokenResponse;
 import com.example.potserver.domain.auth.presentation.dto.response.MyInfoResponse;
+import com.example.potserver.domain.auth.service.FindPasswordService;
 import com.example.potserver.domain.auth.service.GetMyInfoService;
 import com.example.potserver.domain.auth.service.LoginService;
 import com.example.potserver.domain.auth.service.SignupService;
+import com.example.potserver.domain.user.presentation.UserController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +24,7 @@ public class AuthController {
     private final SignupService signupService;
     private final LoginService loginService;
     private final GetMyInfoService getMyInfoService;
+    private final FindPasswordService findPasswordService;
 
     @PostMapping("/signup")
     public TokenResponse signup(@RequestBody @Valid SignupRequest request) {
@@ -34,6 +39,11 @@ public class AuthController {
     @GetMapping("/my-info")
     public MyInfoResponse getMyInfo() {
         return getMyInfoService.getMyInfo();
+    }
+
+    @GetMapping("/find-password")
+    public PasswordResponse findPassword(@RequestBody @Valid FindPasswordRequest request) {
+        return findPasswordService.findPassword(request);
     }
 
 }
