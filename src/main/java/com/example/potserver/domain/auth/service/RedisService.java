@@ -1,4 +1,4 @@
-package com.example.potserver.domain.user.service;
+package com.example.potserver.domain.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
